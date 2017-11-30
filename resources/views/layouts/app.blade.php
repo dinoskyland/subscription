@@ -12,66 +12,86 @@
 
     <!-- Styles -->
     <link href="{{ asset('css/app.css') }}" rel="stylesheet">
+    <!-- Bulma Version 0.6.1 -->
+    <!-- <link href="https://cdnjs.cloudflare.com/ajax/libs/bulma/0.6.1/css/bulma.min.css" rel="stylesheet"> -->
 </head>
 <body>
     <div id="app">
-        <nav class="navbar navbar-default navbar-static-top">
-            <div class="container">
-                <div class="navbar-header">
+        <section class="hero is-light is-fullheight">
+            <div class="hero-head">
+                <nav class="navbar">
+                    <div class="container">
+                        <div class="navbar-brand">
+                            <a class="navbar-item" href="https://bulma.io/">
+                                {{ config('app.name', 'Laravel') }}
+                            </a>
+                            <div class="navbar-burger burger" data-target="navMenuIndex" onclick="document.querySelector('.navbar-menu').classList.toggle('is-active');">
+                                <span></span>
+                                <span></span>
+                                <span></span>
+                            </div>
+                        </div>
 
-                    <!-- Collapsed Hamburger -->
-                    <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#app-navbar-collapse" aria-expanded="false">
-                        <span class="sr-only">Toggle Navigation</span>
-                        <span class="icon-bar"></span>
-                        <span class="icon-bar"></span>
-                        <span class="icon-bar"></span>
-                    </button>
-
-                    <!-- Branding Image -->
-                    <a class="navbar-brand" href="{{ url('/') }}">
-                        {{ config('app.name', 'Laravel') }}
-                    </a>
-                </div>
-
-                <div class="collapse navbar-collapse" id="app-navbar-collapse">
-                    <!-- Left Side Of Navbar -->
-                    <ul class="nav navbar-nav">
-                        &nbsp;
-                    </ul>
-
-                    <!-- Right Side Of Navbar -->
-                    <ul class="nav navbar-nav navbar-right">
-                        <!-- Authentication Links -->
-                        @guest
-                            <li><a href="{{ route('login') }}">Login</a></li>
-                            <li><a href="{{ route('register') }}">Register</a></li>
-                        @else
-                            <li class="dropdown">
-                                <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false" aria-haspopup="true">
-                                    {{ Auth::user()->name }} <span class="caret"></span>
+                        <div id="navMenuIndex" class="navbar-menu">
+                            <div class="navbar-start">
+                                <a class="navbar-item" href="https://bulma.io/">
+                                    Home
                                 </a>
-
-                                <ul class="dropdown-menu">
-                                    <li>
-                                        <a href="{{ route('logout') }}"
-                                            onclick="event.preventDefault();
-                                                     document.getElementById('logout-form').submit();">
-                                            Logout
+                                <div class="navbar-item has-dropdown is-hoverable">
+                                    <a class="navbar-link" href="https://bulma.io/">
+                                        Docs
+                                    </a>
+                                    <div class="navbar-dropdown is-boxed">
+                                        <a class="navbar-item" href="/documentation/overview/start/">
+                                            Overview
                                         </a>
+                                        <a class="navbar-item" href="https://bulma.io/documentation/modifiers/syntax/">
+                                            Modifiers
+                                        </a>
+                                        <a class="navbar-item" href="https://bulma.io/documentation/columns/basics/">
+                                            Columns
+                                        </a>
+                                    </div>
+                                </div>
+                            </div>
+                        
+                            <div class="navbar-end">
+                                @guest
+                                    <a class="navbar-item" href="{{ route('login') }}">
+                                        Login
+                                    </a>
+                                    <a class="navbar-item" href="{{ route('register') }}">
+                                        Register
+                                    </a>
+                                @else
+                                    <div class="navbar-item has-dropdown is-hoverable">
+                                        <a href="#" class="navbar-link" data-toggle="dropdown" role="button" aria-expanded="false" aria-haspopup="true">
+                                            {{ Auth::user()->name }}
+                                        </a>
+                                        <div class="navbar-dropdown is-boxed">
+                                            <a href="{{ route('logout') }}"
+                                                onclick="event.preventDefault();
+                                                            document.getElementById('logout-form').submit();">
+                                                Logout
+                                            </a>
 
-                                        <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
-                                            {{ csrf_field() }}
-                                        </form>
-                                    </li>
-                                </ul>
-                            </li>
-                        @endguest
-                    </ul>
-                </div>
+                                            <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
+                                                {{ csrf_field() }}
+                                            </form>
+                                        </div>
+                                    </div>
+                                @endguest
+                            </div>          
+                        </div>  
+                    </div>
+                </nav>
             </div>
-        </nav>
 
-        @yield('content')
+            @yield('content')
+
+            <div class="hero-foot">
+            </div>
+    </section>
     </div>
 
     <!-- Scripts -->
